@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- toast link-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+ <!-- css link -->
+    <link rel="stylesheet" href="/css/register.css">
+   
+</head>
+<body>
+    <div id="loading">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>   
+    </div>
+    <div class="main">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1 mx-3">Coding club of IT</span>
+            </div>
+          </nav>
+
+
+          <!-- form  -->
+          <form class="my-5" action='/newUser' method="post">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label mx-2">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label mx-2">Password</label>
+              <input type="password" class="form-control" name="password" onchange="on()" id="password1" id="exampleInputPassword1"  required>
+            </div>
+           
+            <div class="mb-3">
+              <label for="exampleInputPassword2" class="form-label mx-2">Retype Password</label>
+              <input type="password" class="form-control"  id="password2" onchange="check()" id="exampleInputPassword2"  required>
+            </div>
+           
+          <div class="mb-3">
+                <label for="Roll Number" class="form-label mx-2">Roll Number</label>
+                <input type="text" class="form-control"  name="username" id="Roll Number"  required>
+              </div>
+          <button type="submit" id="Button" class="btn btn-outline-secondary my-3">Register</button>
+        </form>
+          <!-- end of forms -->
+    </div>
+    <!-- js  -->
+    <script>
+      window.onload = ()=>{
+    document.querySelector('.main').style.display = 'none'
+}
+
+setTimeout(() => {
+    document.querySelector('#loading').style.display = 'none';
+    document.querySelector('.main').style.display = 'block'
+}, 4000);
+let errors=0;
+
+
+// form validation
+var btn=document.getElementById("Button");
+btn.disabled=true;
+let password1;
+let password2;
+function on(){
+password1=document.getElementById('password1').value;
+ if(password1.length<6)
+   {
+   
+    btn.disabled=true;
+    
+              Toastify({
+            text: "Enter atleast 6 letters",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background:"red",
+            },
+          }).showToast();
+
+  }
+  else{
+    btn.disabled=false;
+  }
+
+}
+function check()
+{
+  password1=document.getElementById('password1').value;
+  password2=document.getElementById('password2').value;
+  console.log(password2)
+  console.log(password1)
+  if(password1 !== password2 )
+  {
+    btn.disabled=true;
+     
+   
+                  Toastify({
+                text: "Enter Correct password",
+                duration: 3000,
+                destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background:"red",
+                },
+
+              }).showToast();
+  }
+  else{
+    btn.disabled=false;
+    
+  }
+
+}
+
+    </script>
+</body>
+</html>
